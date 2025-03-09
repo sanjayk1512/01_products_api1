@@ -11,9 +11,18 @@ pipeline {
                  git branch: 'main', url: 'https://github.com/Darin40/01_products_api.git'
             }
         }
+        stage('Fetch DB Secrets') {
+            steps {
+                script {
+                    env.DB_HOST = sh(script: "kubectl get secret db-secret -o jsonpath='{.data.db_host}' | base64 --decode", returnStdout: true).trim()
+                    env.DB_USER = sh(script: "kubectl get secret db-secret -o jsonpath='{.data.db_user}' | base64 --decode", returnStdout: true).trim()
+                    env.DB_PASS = sh(script: "kubectl get secret db-secret -o jsonpath='{.data.db_password}' | base64 --decode", returnStdout: true).trim()
+                }
+            }
+        }
         stage('Build with Maven') {
             steps {
-                sh 'mvn clean package'
+                sh 'mvn clean package -DDB_HOST=$DB_HOST -DDB_USER=$DB_USER -DDB_PASS=$DB_PASS'
             }
         }
         stage('Build Docker Image') {

@@ -8,7 +8,7 @@ pipeline {
     stages {
         stage('Clone Repository') {
             steps {
-                git 'https://github.com/Darin40/01_products_api.git'
+                 git branch: 'main', url: 'https://github.com/Darin40/01_products_api.git'
             }
         }
         stage('Build with Maven') {

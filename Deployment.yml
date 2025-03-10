@@ -34,7 +34,7 @@ spec:
           valueFrom:
             secretKeyRef:
               name: db-secret
-              key: db_pass
+              key: db_password
 ---
 apiVersion: v1
 kind: Service

@@ -35,6 +35,8 @@ spec:
             secretKeyRef:
               name: db-secret
               key: db_password
+        - name: DB_URL
+          value: "jdbc:mysql://products-db-instance-1.c32kue2earbr.ap-south-1.rds.amazonaws.com:3306/vinodses_ecomm"
 ---
 apiVersion: v1
 kind: Service

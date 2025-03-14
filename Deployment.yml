@@ -21,11 +21,23 @@ spec:
         - containerPort: 8080
         env:
         - name: DB_URL
-          value: "jdbc:mysql://65.0.107.111:3306/vinodses_ecomm"
+          value: "jdbc:mysql://$(DB_HOST):3306/vinodses_ecomm"
+        - name: DB_HOST
+          valueFrom:
+            secretKeyRef:
+              name: db-secret
+              key: db_host
         - name: DB_USER
-          value: "root"
+          valueFrom:
+            secretKeyRef:
+              name: db-secret
+              key: db_user
         - name: DB_PASS
-          value: "root"
+          valueFrom:
+            secretKeyRef:
+              name: db-secret
+              key: db_password
+
         
 ---
 apiVersion: v1

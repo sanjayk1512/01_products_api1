@@ -20,23 +20,13 @@ spec:
         ports:
         - containerPort: 8080
         env:
-        - name: DB_HOST
-          valueFrom:
-            secretKeyRef:
-              name: db-secret
-              key: db_host
-        - name: DB_USER
-          valueFrom:
-            secretKeyRef:
-              name: db-secret
-              key: db_user
-        - name: DB_PASS
-          valueFrom:
-            secretKeyRef:
-              name: db-secret
-              key: db_password
         - name: DB_URL
-          value: "jdbc:mysql://products-db-instance-1.c32kue2earbr.ap-south-1.rds.amazonaws.com:3306/vinodses_ecomm"
+          value: "jdbc:mysql://65.0.107.111:3306/vinodses_ecomm"
+        - name: DB_USER
+          value: "root"
+        - name: DB_PASS
+          value: "root"
+        
 ---
 apiVersion: v1
 kind: Service

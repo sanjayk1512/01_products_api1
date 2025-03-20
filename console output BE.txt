@@ -1,0 +1,312 @@
+Started by user darin
+Checking out git https://github.com/Darin40/01_products_api.git into /var/lib/jenkins/workspace/test 2@script/32ac81db58a2257cb6aae46c7d3c4dfafcfccfda7baee64acb3a7b2a0b7a74fb to read Jenkinsfile
+Selected Git installation does not exist. Using Default
+The recommended git tool is: NONE
+No credentials specified
+ > git rev-parse --resolve-git-dir /var/lib/jenkins/workspace/test 2@script/32ac81db58a2257cb6aae46c7d3c4dfafcfccfda7baee64acb3a7b2a0b7a74fb/.git # timeout=10
+Fetching changes from the remote Git repository
+ > git config remote.origin.url https://github.com/Darin40/01_products_api.git # timeout=10
+Fetching upstream changes from https://github.com/Darin40/01_products_api.git
+ > git --version # timeout=10
+ > git --version # 'git version 2.43.0'
+ > git fetch --tags --force --progress -- https://github.com/Darin40/01_products_api.git +refs/heads/*:refs/remotes/origin/* # timeout=10
+ > git rev-parse refs/remotes/origin/main^{commit} # timeout=10
+Checking out Revision d69c8c1a2f3245827dff1015ca8322a0c2a7415b (refs/remotes/origin/main)
+ > git config core.sparsecheckout # timeout=10
+ > git checkout -f d69c8c1a2f3245827dff1015ca8322a0c2a7415b # timeout=10
+Commit message: "Update Deployment.yml"
+ > git rev-list --no-walk d69c8c1a2f3245827dff1015ca8322a0c2a7415b # timeout=10
+[Pipeline] Start of Pipeline
+[Pipeline] node
+Running on Jenkins in /var/lib/jenkins/workspace/test 2
+[Pipeline] {
+[Pipeline] stage
+[Pipeline] { (Declarative: Checkout SCM)
+[Pipeline] checkout
+Selected Git installation does not exist. Using Default
+The recommended git tool is: NONE
+No credentials specified
+ > git rev-parse --resolve-git-dir /var/lib/jenkins/workspace/test 2/.git # timeout=10
+Fetching changes from the remote Git repository
+ > git config remote.origin.url https://github.com/Darin40/01_products_api.git # timeout=10
+Fetching upstream changes from https://github.com/Darin40/01_products_api.git
+ > git --version # timeout=10
+ > git --version # 'git version 2.43.0'
+ > git fetch --tags --force --progress -- https://github.com/Darin40/01_products_api.git +refs/heads/*:refs/remotes/origin/* # timeout=10
+ > git rev-parse refs/remotes/origin/main^{commit} # timeout=10
+Checking out Revision d69c8c1a2f3245827dff1015ca8322a0c2a7415b (refs/remotes/origin/main)
+ > git config core.sparsecheckout # timeout=10
+ > git checkout -f d69c8c1a2f3245827dff1015ca8322a0c2a7415b # timeout=10
+Commit message: "Update Deployment.yml"
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] withEnv
+[Pipeline] {
+[Pipeline] withEnv
+[Pipeline] {
+[Pipeline] stage
+[Pipeline] { (Clone Repository)
+[Pipeline] git
+Selected Git installation does not exist. Using Default
+The recommended git tool is: NONE
+No credentials specified
+ > git rev-parse --resolve-git-dir /var/lib/jenkins/workspace/test 2/.git # timeout=10
+Fetching changes from the remote Git repository
+ > git config remote.origin.url https://github.com/Darin40/01_products_api.git # timeout=10
+Fetching upstream changes from https://github.com/Darin40/01_products_api.git
+ > git --version # timeout=10
+ > git --version # 'git version 2.43.0'
+ > git fetch --tags --force --progress -- https://github.com/Darin40/01_products_api.git +refs/heads/*:refs/remotes/origin/* # timeout=10
+ > git rev-parse refs/remotes/origin/main^{commit} # timeout=10
+Checking out Revision d69c8c1a2f3245827dff1015ca8322a0c2a7415b (refs/remotes/origin/main)
+ > git config core.sparsecheckout # timeout=10
+ > git checkout -f d69c8c1a2f3245827dff1015ca8322a0c2a7415b # timeout=10
+ > git branch -a -v --no-abbrev # timeout=10
+ > git branch -D main # timeout=10
+ > git checkout -b main d69c8c1a2f3245827dff1015ca8322a0c2a7415b # timeout=10
+Commit message: "Update Deployment.yml"
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Fetch DB Secrets)
+[Pipeline] script
+[Pipeline] {
+[Pipeline] sh
++ kubectl get secret db-secret -o jsonpath={.data.db_host}
++ base64 --decode
+[Pipeline] sh
++ kubectl get secret db-secret -o jsonpath={.data.db_user}
++ base64 --decode
+[Pipeline] sh
++ kubectl get secret db-secret -o jsonpath={.data.db_password}
++ base64 --decode
+[Pipeline] }
+[Pipeline] // script
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Build with Maven)
+[Pipeline] sh
++ mvn clean package -DDB_HOST=65.0.107.111 -DDB_USER=root -DDB_PASS=root
+[[1;34mINFO[m] Scanning for projects...
+[[1;34mINFO[m] 
+[[1;34mINFO[m] [1m----------------< [0;36morg.scopeindia.ecomm:01_Products_API[0;1m >----------------[m
+[[1;34mINFO[m] [1mBuilding ecommerce_backend 0.0.1-SNAPSHOT[m
+[[1;34mINFO[m] [1m--------------------------------[ jar ]---------------------------------[m
+[[1;33mWARNING[m] The artifact mysql:mysql-connector-java:jar:8.0.33 has been relocated to com.mysql:mysql-connector-j:jar:8.0.33: MySQL Connector/J artifacts moved to reverse-DNS compliant Maven 2+ coordinates.
+[[1;34mINFO[m] 
+[[1;34mINFO[m] [1m--- [0;32mmaven-clean-plugin:3.3.2:clean[m [1m(default-clean)[m @ [36m01_Products_API[0;1m ---[m
+[[1;34mINFO[m] Deleting /var/lib/jenkins/workspace/test 2/target
+[[1;34mINFO[m] 
+[[1;34mINFO[m] [1m--- [0;32mmaven-resources-plugin:3.3.1:resources[m [1m(default-resources)[m @ [36m01_Products_API[0;1m ---[m
+[[1;34mINFO[m] Copying 1 resource from src/main/resources to target/classes
+[[1;34mINFO[m] Copying 0 resource from src/main/resources to target/classes
+[[1;34mINFO[m] 
+[[1;34mINFO[m] [1m--- [0;32mmaven-compiler-plugin:3.13.0:compile[m [1m(default-compile)[m @ [36m01_Products_API[0;1m ---[m
+[[1;34mINFO[m] Recompiling the module because of [1mchanged source code[m.
+[[1;34mINFO[m] Compiling 6 source files with javac [debug parameters release 17] to target/classes
+[[1;34mINFO[m] 
+[[1;34mINFO[m] [1m--- [0;32mmaven-resources-plugin:3.3.1:testResources[m [1m(default-testResources)[m @ [36m01_Products_API[0;1m ---[m
+[[1;34mINFO[m] skip non existing resourceDirectory /var/lib/jenkins/workspace/test 2/src/test/resources
+[[1;34mINFO[m] 
+[[1;34mINFO[m] [1m--- [0;32mmaven-compiler-plugin:3.13.0:testCompile[m [1m(default-testCompile)[m @ [36m01_Products_API[0;1m ---[m
+[[1;34mINFO[m] Recompiling the module because of [1mchanged dependency[m.
+[[1;34mINFO[m] Compiling 1 source file with javac [debug parameters release 17] to target/test-classes
+[[1;34mINFO[m] 
+[[1;34mINFO[m] [1m--- [0;32mmaven-surefire-plugin:3.2.5:test[m [1m(default-test)[m @ [36m01_Products_API[0;1m ---[m
+[[1;34mINFO[m] Using auto detected provider org.apache.maven.surefire.junitplatform.JUnitPlatformProvider
+[[1;34mINFO[m] 
+[[1;34mINFO[m] -------------------------------------------------------
+[[1;34mINFO[m]  T E S T S
+[[1;34mINFO[m] -------------------------------------------------------
+[[1;34mINFO[m] Running org.scopeindia.ecomm.[1mEcommerceBackendApplicationTests[m
+11:00:31.250 [main] INFO org.springframework.test.context.support.AnnotationConfigContextLoaderUtils -- Could not detect default configuration classes for test class [org.scopeindia.ecomm.EcommerceBackendApplicationTests]: EcommerceBackendApplicationTests does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+11:00:31.461 [main] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper -- Found @SpringBootConfiguration org.scopeindia.ecomm.EcommerceBackendApplication for test class org.scopeindia.ecomm.EcommerceBackendApplicationTests
+11:00:31.800 [main] INFO org.springframework.boot.devtools.restart.RestartApplicationListener -- Restart disabled due to context in which it is running
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+
+ :: Spring Boot ::                (v3.3.4)
+
+2025-03-20T11:00:32.263Z  INFO 201682 --- [           main] o.s.e.EcommerceBackendApplicationTests   : Starting EcommerceBackendApplicationTests using Java 17.0.14 with PID 201682 (started by jenkins in /var/lib/jenkins/workspace/test 2)
+2025-03-20T11:00:32.267Z  INFO 201682 --- [           main] o.s.e.EcommerceBackendApplicationTests   : No active profile set, falling back to 1 default profile: "default"
+2025-03-20T11:00:33.716Z  INFO 201682 --- [           main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-03-20T11:00:33.810Z  INFO 201682 --- [           main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 79 ms. Found 2 JPA repository interfaces.
+2025-03-20T11:00:34.769Z  INFO 201682 --- [           main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-03-20T11:00:34.907Z  INFO 201682 --- [           main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.5.3.Final
+2025-03-20T11:00:34.978Z  INFO 201682 --- [           main] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2025-03-20T11:00:35.550Z  INFO 201682 --- [           main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-03-20T11:00:35.611Z  INFO 201682 --- [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2025-03-20T11:00:35.944Z  INFO 201682 --- [           main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@2c16677c
+2025-03-20T11:00:35.947Z  INFO 201682 --- [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2025-03-20T11:00:36.018Z  WARN 201682 --- [           main] org.hibernate.dialect.Dialect            : HHH000511: The 5.5.5 version for [org.hibernate.dialect.MySQLDialect] is no longer supported, hence certain features may not work properly. The minimum supported version is 8.0.0. Check the community dialects project for available legacy versions.
+2025-03-20T11:00:36.029Z  WARN 201682 --- [           main] org.hibernate.orm.deprecation            : HHH90000025: MySQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-03-20T11:00:37.819Z  INFO 201682 --- [           main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+Hibernate: alter table product modify column date_created date
+Hibernate: alter table product add column last_update date
+Hibernate: alter table product modify column unit_price decimal(38,2)
+2025-03-20T11:00:38.075Z  INFO 201682 --- [           main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-03-20T11:00:38.565Z  WARN 201682 --- [           main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-03-20T11:00:40.141Z  INFO 201682 --- [           main] o.s.e.EcommerceBackendApplicationTests   : Started EcommerceBackendApplicationTests in 8.387 seconds (process running for 10.112)
+OpenJDK 64-Bit Server VM warning: Sharing is only supported for boot loader classes because bootstrap classpath has been appended
+[[1;34mINFO[m] [1;32mTests run: [0;1;32m1[m, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 9.967 s -- in org.scopeindia.ecomm.[1mEcommerceBackendApplicationTests[m
+[[1;34mINFO[m] 
+[[1;34mINFO[m] Results:
+[[1;34mINFO[m] 
+[[1;34mINFO[m] [1;32mTests run: 1, Failures: 0, Errors: 0, Skipped: 0[m
+[[1;34mINFO[m] 
+[[1;34mINFO[m] 
+[[1;34mINFO[m] [1m--- [0;32mmaven-jar-plugin:3.4.2:jar[m [1m(default-jar)[m @ [36m01_Products_API[0;1m ---[m
+[[1;34mINFO[m] Building jar: /var/lib/jenkins/workspace/test 2/target/products_api.jar
+[[1;34mINFO[m] 
+[[1;34mINFO[m] [1m--- [0;32mspring-boot-maven-plugin:3.3.4:repackage[m [1m(repackage)[m @ [36m01_Products_API[0;1m ---[m
+[[1;34mINFO[m] Replacing main artifact /var/lib/jenkins/workspace/test 2/target/products_api.jar with repackaged archive, adding nested dependencies in BOOT-INF/.
+[[1;34mINFO[m] The original artifact has been renamed to /var/lib/jenkins/workspace/test 2/target/products_api.jar.original
+[[1;34mINFO[m] [1m------------------------------------------------------------------------[m
+[[1;34mINFO[m] [1;32mBUILD SUCCESS[m
+[[1;34mINFO[m] [1m------------------------------------------------------------------------[m
+[[1;34mINFO[m] Total time:  20.190 s
+[[1;34mINFO[m] Finished at: 2025-03-20T11:00:42Z
+[[1;34mINFO[m] [1m------------------------------------------------------------------------[m
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Build Docker Image)
+[Pipeline] script
+[Pipeline] {
+[Pipeline] sh
++ mvn help:evaluate -Dexpression=project.version -q -DforceStdout
+[Pipeline] isUnix
+[Pipeline] withEnv
+[Pipeline] {
+[Pipeline] sh
++ docker build -t darin04/products-api:0.0.1-SNAPSHOT .
+DEPRECATED: The legacy builder is deprecated and will be removed in a future release.
+            Install the buildx component to build images with BuildKit:
+            https://docs.docker.com/go/buildx/
+
+Sending build context to Docker daemon  49.43MB
+
+Step 1/5 : FROM openjdk:17
+17: Pulling from library/openjdk
+Digest: sha256:528707081fdb9562eb819128a9f85ae7fe000e2fbaeaf9f87662e7b3f38cb7d8
+Status: Downloaded newer image for openjdk:17
+ ---> 5e28ba2b4cdb
+Step 2/5 : COPY target/products_api.jar /usr/app/
+ ---> 22bc74437533
+Step 3/5 : WORKDIR /usr/app/
+ ---> Running in 552d1cd14198
+ ---> Removed intermediate container 552d1cd14198
+ ---> 4fd038f78ec7
+Step 4/5 : ENTRYPOINT ["java", "-jar", "products_api.jar"]
+ ---> Running in 7e3fd21a5fba
+ ---> Removed intermediate container 7e3fd21a5fba
+ ---> 94b76129328e
+Step 5/5 : EXPOSE 8080
+ ---> Running in d5afb2609692
+ ---> Removed intermediate container d5afb2609692
+ ---> da2f46ad77d6
+Successfully built da2f46ad77d6
+Successfully tagged darin04/products-api:0.0.1-SNAPSHOT
+[Pipeline] }
+[Pipeline] // withEnv
+[Pipeline] }
+[Pipeline] // script
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Push Docker Image)
+[Pipeline] script
+[Pipeline] {
+[Pipeline] withDockerRegistry
+Using the existing docker config file.
+Removing blacklisted property: auths
+$ docker login -u darin04 -p ******** https://index.docker.io/v1/
+WARNING! Using --password via the CLI is insecure. Use --password-stdin.
+WARNING! Your password will be stored unencrypted in /var/lib/jenkins/workspace/test 2@tmp/5710b94d-9f69-4356-b7f4-8794394d2940/config.json.
+Configure a credential helper to remove this warning. See
+https://docs.docker.com/engine/reference/commandline/login/#credentials-store
+
+Login Succeeded
+[Pipeline] {
+[Pipeline] sh
++ mvn help:evaluate -Dexpression=project.version -q -DforceStdout
+[Pipeline] isUnix
+[Pipeline] withEnv
+[Pipeline] {
+[Pipeline] sh
++ docker tag darin04/products-api:0.0.1-SNAPSHOT darin04/products-api:0.0.1-SNAPSHOT
+[Pipeline] }
+[Pipeline] // withEnv
+[Pipeline] isUnix
+[Pipeline] withEnv
+[Pipeline] {
+[Pipeline] sh
++ docker push darin04/products-api:0.0.1-SNAPSHOT
+The push refers to repository [docker.io/darin04/products-api]
+127866ca03c3: Preparing
+dc9fa3d8b576: Preparing
+27ee19dc88f2: Preparing
+c8dd97366670: Preparing
+dc9fa3d8b576: Layer already exists
+c8dd97366670: Layer already exists
+27ee19dc88f2: Layer already exists
+127866ca03c3: Pushed
+0.0.1-SNAPSHOT: digest: sha256:606fb9822e8a4b79634599f4da243cf934ad75109259f55a53ae59b76b11cd18 size: 1166
+[Pipeline] }
+[Pipeline] // withEnv
+[Pipeline] isUnix
+[Pipeline] withEnv
+[Pipeline] {
+[Pipeline] sh
++ docker tag darin04/products-api:0.0.1-SNAPSHOT darin04/products-api:latest
+[Pipeline] }
+[Pipeline] // withEnv
+[Pipeline] isUnix
+[Pipeline] withEnv
+[Pipeline] {
+[Pipeline] sh
++ docker push darin04/products-api:latest
+The push refers to repository [docker.io/darin04/products-api]
+127866ca03c3: Preparing
+dc9fa3d8b576: Preparing
+27ee19dc88f2: Preparing
+c8dd97366670: Preparing
+27ee19dc88f2: Layer already exists
+dc9fa3d8b576: Layer already exists
+127866ca03c3: Layer already exists
+c8dd97366670: Layer already exists
+latest: digest: sha256:606fb9822e8a4b79634599f4da243cf934ad75109259f55a53ae59b76b11cd18 size: 1166
+[Pipeline] }
+[Pipeline] // withEnv
+[Pipeline] }
+[Pipeline] // withDockerRegistry
+[Pipeline] }
+[Pipeline] // script
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Deploy to Kubernetes)
+[Pipeline] script
+[Pipeline] {
+[Pipeline] sh
++ mvn help:evaluate -Dexpression=project.version -q -DforceStdout
+[Pipeline] sh
++ kubectl set image deployment/products-api products-api=darin04/products-api:0.0.1-SNAPSHOT -n default
+[Pipeline] }
+[Pipeline] // script
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] }
+[Pipeline] // withEnv
+[Pipeline] }
+[Pipeline] // withEnv
+[Pipeline] }
+[Pipeline] // node
+[Pipeline] End of Pipeline
+Finished: SUCCESS
